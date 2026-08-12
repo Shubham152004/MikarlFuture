@@ -1,5 +1,6 @@
 import React from "react";
-import { AbsoluteFill, Sequence } from "remotion";
+import { AbsoluteFill,staticFile, Sequence } from "remotion";
+import {Audio} from "@remotion/media";
 import { timeline } from "./scenes/timeline";
 import { IntroGlitch } from "./scenes/IntroGlitch";
 import { ChatDemo } from "./scenes/ChatDemo";
@@ -17,6 +18,7 @@ import { PlatformTitle } from "./scenes/platfromTitle";
 import { LogoOrbit } from "./scenes/logoOrbit";
 import { MiraklAds } from "./scenes/miraklAds";
 import { LogoFormation } from "./scenes/logoFormation";
+
 
 /**
  * NEW CONCEPT: <Sequence>
@@ -40,6 +42,10 @@ import { LogoFormation } from "./scenes/logoFormation";
 export const Template: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#111" }}>
+      <Audio
+        src={staticFile("miraklaudio.mp3")}
+        volume={0.7}
+      />
       <Sequence from={timeline.introGlitch.from} durationInFrames={timeline.introGlitch.duration}>
         <IntroGlitch />
       </Sequence>

@@ -2,23 +2,9 @@ import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
 import { GradientBackground } from "../components/GradientBackground";
 import { AnimatedText } from "../components/AnimatedText";
+import { ProductCard } from "../components/ProductCard";
 
-/**
- * NEW CONCEPT: real CSS 3D transforms (perspective + rotateX)
- * Everything up to now has been 2D (translateY, scale, opacity). The
- * reference video tilts UI screenshots back in 3D space, like they're
- * lying on a table tipped toward camera. Three CSS properties do this:
- *
- * 1. perspective — set on the PARENT. It's the "distance from the eye to
- *    the screen." Smaller number = more extreme/dramatic 3D distortion,
- *    larger number = subtler. Without this, rotateX just squishes flat.
- * 2. transform-style: preserve-3d — set on the PARENT. Tells the browser
- *    "let children actually exist in 3D space" instead of flattening them.
- * 3. transform: rotateX(deg) — set on the CHILD you want tilted.
- *
- * This is plain CSS, not a Remotion-specific API — Remotion just happens
- * to render real CSS in real Chrome, so any 3D CSS trick works here.
- */
+
 export const LaunchMarketplace: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -36,12 +22,37 @@ export const LaunchMarketplace: React.FC = () => {
 
   // Product cards inside the mockup stagger in after the panel itself lands.
   const products = [
-    { name: "Heavy Jacket", price: "$89" },
-    { name: "Trekking Poles", price: "$45" },
-    { name: "Hiking Bag", price: "$65" },
-    { name: "Wool Skirt", price: "$52" },
-    { name: "Picnic Hat", price: "$28" },
-  ];
+  {
+    name: "Heavy Jacket",
+    brand: "Zadig & Voltaire",
+    price: "$349.99",
+    image: "/jacket.png",
+  },
+  {
+    name: "Floral Dress",
+    brand: "Olivia",
+    price: "$49.99",
+    image: "/frock.png",
+  },
+  {
+    name: "Hiking Bag",
+    brand: "Mirakl",
+    price: "$65",
+    image: "/jacket.png",
+  },
+  {
+    name: "Wool Skirt",
+    brand: "Fashion Co.",
+    price: "$52",
+    image: "/frock.png",
+  },
+  {
+    name: "Picnic Hat",
+    brand: "Summer Edit",
+    price: "$28",
+    image: "/jacket.png",
+  },
+];
 
   return (
     <AbsoluteFill>
@@ -107,11 +118,13 @@ export const LaunchMarketplace: React.FC = () => {
             <div style={{ display: "flex", padding: 20, gap: 16 }}>
               {products.map((p, i) => {
                 const cardDelay = 18 + i * 4;
+
                 const cardProgress = spring({
                   frame: frame - cardDelay,
                   fps,
                   config: { damping: 200, stiffness: 220 },
                 });
+
                 return (
                   <div
                     key={p.name}
@@ -121,16 +134,12 @@ export const LaunchMarketplace: React.FC = () => {
                       transform: `translateY(${(1 - cardProgress) * 16}px)`,
                     }}
                   >
-                    <div
-                      style={{
-                        height: 130,
-                        borderRadius: 10,
-                        background: `hsl(${(i * 47) % 360}, 30%, 88%)`,
-                        marginBottom: 8,
-                      }}
+                    <ProductCard
+                      name={p.name}
+                      price={p.price}
+                      image={p.image}
+                      brand={p.brand}
                     />
-                    <div style={{ fontSize: 12, color: "#222", fontWeight: 600 }}>{p.name}</div>
-                    <div style={{ fontSize: 12, color: "#888" }}>{p.price}</div>
                   </div>
                 );
               })}
