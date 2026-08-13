@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig,staticFile } from "remotion";
 import { GradientBackground } from "../components/GradientBackground";
 import { useEntrance } from "../components/useEntrance";
 
@@ -91,10 +91,23 @@ export const ChatDemo: React.FC = () => {
                 width: 84,
                 height: 84,
                 borderRadius: 14,
-                background: "linear-gradient(160deg, #d3373f, #a3232c)",
+                background: "#f5f5f5",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden",
                 flexShrink: 0,
               }}
-            />
+            >
+              <img
+                src={staticFile("jacket.png")}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 13, color: "#8a8a95", fontWeight: 600, letterSpacing: 0.4 }}>
                 ZADIG &amp; VOLTAIRE

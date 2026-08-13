@@ -38,7 +38,7 @@ export const LaunchMarketplace: React.FC = () => {
     name: "Hiking Bag",
     brand: "Mirakl",
     price: "$65",
-    image: "/jacket.png",
+    image: "/hikingbag.png",
   },
   {
     name: "Wool Skirt",

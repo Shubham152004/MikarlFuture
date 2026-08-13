@@ -3,13 +3,6 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 import { GradientBackground } from "../components/GradientBackground";
 import { useEntrance } from "../components/useEntrance";
 
-/**
- * NEW CONCEPT: clip-path circle-wipe transition.
- * The reference cuts through a small expanding black circle between
- * sections. We fake that with clip-path: circle(radius at 50% 50%) growing
- * from 0 to a size that covers the whole 1920x1080 frame (a circle needs
- * radius ~1200px to fully cover a 1920x1080 rect from the center).
- */
 export const CatalogReveal: React.FC = () => {
   const frame = useCurrentFrame();
 
